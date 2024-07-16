@@ -1,5 +1,6 @@
 package com.example.customemaildetailflow
 
+import android.app.Activity
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -60,6 +61,7 @@ class EmailAdapter(private val emailList:MutableList<Email>,private val activity
                     putString("date",emailList[position].date)
                     putBoolean("isStarred",emailList[position].isStarred)
                 }
+
                 activity.supportFragmentManager.beginTransaction()
                     .replace(R.id.fragmentContainerView,emailFragment)
                     .addToBackStack("Detail View")

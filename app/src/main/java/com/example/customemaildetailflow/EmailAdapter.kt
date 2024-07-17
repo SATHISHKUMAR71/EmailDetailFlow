@@ -30,6 +30,7 @@ class EmailAdapter(private val emailList:MutableList<Email>,private val activity
         holder.itemView.apply {
             val email = this.findViewById<CustomEmail>(R.id.emailView)
             val star = email.getStar()
+            email.transitionName = "emailListTransitionName$position"
             email.setTitle(emailList[position].title)
             email.setContent(emailList[position].content)
             email.setSubtitle(emailList[position].subtitle)
@@ -55,15 +56,18 @@ class EmailAdapter(private val emailList:MutableList<Email>,private val activity
                 emailList[position].isViewed = true
                 val emailFragment = EmailDetailFragment()
                 emailFragment.arguments = Bundle().apply {
+                    putString("transitionName","emailListTransitionName$position")
                     putString("title",emailList[position].title)
                     putString("heading",emailList[position].subtitle)
                     putString("content",emailList[position].content)
                     putString("date",emailList[position].date)
                     putBoolean("isStarred",emailList[position].isStarred)
                 }
-
+                println("listEmailTransition:${"emailListTransitionName$position"}")
                 activity.supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerView,emailFragment)
+                    .setReorderingAllowed(true)
+                    .addSharedElement(email,"emailListTransitionName$position")
+                    .replace(R.id.fragmentEmailList,emailFragment)
                     .addToBackStack("Detail View")
                     .commit()
                 email.getTitle().typeface = Typeface.DEFAULT

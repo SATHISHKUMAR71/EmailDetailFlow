@@ -5,11 +5,15 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <com.example.customemaildetailflow.CustomEmail
         android:padding="20dp"
         android:id="@+id/emailView"
         android:background="@drawable/email_ripple"
         app:profileLetter="T"
+        android:transitionName="detailView"
         app:emailTitle="New Emailval dividerItemDecoration = DividerItemDecoration(rv.context, LinearLayoutManager.VERTICAL)"
         app:emailContents="This is the New Contentval dividerItemDecoration = DividerItemDecoration(rv.context, LinearLayoutManager.VERTICAL)"
         app:emailSubtitle="Subtitlval dividerItemDecoration = DividerItemDecoration(rv.context, LinearLayoutManager.VERTICAL)e"
@@ -19,5 +23,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

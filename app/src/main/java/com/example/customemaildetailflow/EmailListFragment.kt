@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionInflater
 
 class EmailListFragment : Fragment() {
 
@@ -16,8 +17,8 @@ class EmailListFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         for(i in 1..5){
-            emailList.add(Email("Hello","Hi Sathish","12 September","Interested in Java",false,false))
-            emailList.add(Email("Google","New Sign in Activity","07 July","Hi Satish is that you signed your google account on the device MK210P",false,false))
+            emailList.add(Email("HelloIEEE Conference on Computer Vision and Pattern Recognition is the biggest and one ofIEEE Conference on Computer Vision and Pattern Recognition is the biggest and one ofIEEE Conference on Computer Vision and Pattern Recognition is the biggest and one of","Hi Sathish","12 Seition is tition is tition is tition is tition is tptember","Interested in Java",false,false))
+            emailList.add(Email("Googlesion and Pattern Rsion and Pattern R","New Sign in Activity","07 September","Hi Satish is that you signed your google account on the device MK210P",false,false))
             emailList.add(Email("New Email","Heading Line","05 May","This is the sample content",false,false))
             emailList.add(Email("Congratulations","Congratulations Sathishkumar Now you are part of the","05 May","This is the sample content",false,false))
             emailList.add(Email("Learn OpenCv","Hello Visionaries","12 December","Hello Visionaries!,\n" +
@@ -44,7 +45,7 @@ class EmailListFragment : Fragment() {
             emailList.add(Email("Special Offer", "Exclusive Discount for Our Loyal Customers", "15 August", "Dear Valued Customer,\n\nWe're excited to offer you an exclusive 30% discount on your next purchase. Use code SPECIAL30 at checkout to redeem.\n\nHappy shopping!\n",false,false))
             emailList.add(Email("Webinar Invitation", "Join Our Webinar on AI in Healthcare", "20 August", "Dear Subscriber,\n\nYou're invited to attend our upcoming webinar on 'The Role of AI in Revolutionizing Healthcare'. Click here to register and secure your spot.\n\nBest regards,\nTeam AI Healthcare\n",false,false))
             // Adding more emails to emailList
-            emailList.add(Email("Job Opportunity", "Exciting Software Developer Position", "25 August", "Dear Candidate,\n\nWe are pleased to inform you about an exciting opportunity for a Software Developer role at our company. Please find attached the job description for more details.\n\nBest regards,\nHR Team",false,false))
+            emailList.add(Email("Job OpportunityIEEE Conference on Computer Vision and Pattern Recognition is the biggest and one ofIEEE Conference on Computer Vision and Pattern Recognition is the biggest and one ofIEEE Conference on Computer Vision and Pattern Recognition is the biggest and one of", "ExcitingIEEE Conference on Computer Vision and Pattern Recognition is the biggest and one ofIEEE Conference on Computer Vision and Pattern Recognition is the biggest and one of Software Developer Position", "25 August", "Dear Candidate,\n\nWe are pleased to inform you about an exciting opportunity for a Software Developer role at our company. Please find attached the job description for more details.\n\nBest regards,\nHR Team",false,false))
             emailList.add(Email("New Feature Announcement", "Introducing Dark Mode in Our App", "30 August", "Dear User,\n\nWe're thrilled to announce the rollout of Dark Mode in our mobile app. Enjoy a new visual experience with reduced eye strain during night-time usage.\n\nExplore the app settings to enable Dark Mode today!\n\nRegards,\nApp Development Team",false,false))
             emailList.add(Email("Customer Feedback Survey", "Help Us Serve You Better", "05 September", "Dear Valued Customer,\n\nYour feedback is important to us! Please take a moment to complete our brief survey and share your thoughts about our products and services.\n\nClick here to begin the survey.\n\nThank you for your participation!\nCustomer Experience Team",false,false))
             emailList.add(Email("Event Invitation", "Attend Our Annual Tech Conference", "10 September", "Dear Tech Enthusiast,\n\nYou're invited to our Annual Tech Conference where industry leaders will discuss the latest trends and innovations in technology. Reserve your spot now and stay ahead of the curve!\n\nWarm regards,\nEvent Organizing Committee",false,false))
@@ -85,7 +86,6 @@ class EmailListFragment : Fragment() {
             emailList.add(Email("Volunteer Appreciation", "Thank You for Your Volunteer Service", "25 May", "Dear Volunteer,\n\nWe deeply appreciate your dedication and commitment to our cause. Your contributions make a significant difference in our community.\n\nWarm regards,\nVolunteer Coordinator",false,false))
             emailList.add(Email("Technology Update", "Introducing Our AI-Powered Assistant", "30 June", "Dear User,\n\nWe're excited to introduce our new AI-powered assistant designed to enhance your productivity and streamline your daily tasks.\n\nDiscover its capabilities today!\nProduct Team",false,false))
             emailList.add(Email("Educational Seminar", "Attend Our Seminar on Emerging Technologies", "05 July", "Dear Tech Enthusiast,\n\nJoin us for an insightful seminar on emerging technologies shaping the future. Gain valuable insights from industry experts.\n\nBest regards,\nEvent Organizers",false,false))
-
         }
     }
 

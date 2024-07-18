@@ -1,6 +1,7 @@
 package com.example.customemaildetailflow
 
 import android.app.Activity
+import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -41,7 +42,6 @@ class EmailAdapter(private val emailList:MutableList<Email>,private val activity
 
         fun checkIsStarred(email:CustomEmail,position:Int){
             if(emailList[position].isStarred){
-//                println("Email is Stared: ${emailList[position].isStarred}")
                 email.getStar().setImageResource(R.drawable.baseline_star_24)
             }
             else{
@@ -61,41 +61,22 @@ class EmailAdapter(private val emailList:MutableList<Email>,private val activity
     override fun onBindViewHolder(holder: EmailViewHolder, position: Int) {
 
         holder.itemView.apply {
-
-            val emailDetailFrag = EmailDetailFragment()
-            val emailListFrag = EmailListFragment()
             val email = this.findViewById<CustomEmail>(R.id.emailView)
             val star = email.getStar()
             holder.bindData(email,position)
             holder.checkIsViewed(email,position)
             holder.checkIsStarred(email,position)
+
             this.setOnClickListener{
                 emailList[position].isViewed = true
-                emailDetailFrag.arguments = Bundle().apply {
-                    putString("transitionName","emailListTransitionName$position")
-                    putString("title",emailList[position].title)
-                    putString("heading",emailList[position].subtitle)
-                    putString("content",emailList[position].content)
-                    putString("date",emailList[position].date)
-                    putBoolean("isStarred",emailList[position].isStarred)
-                    putString("profileLetter",emailList[position].title[0].toString())
-                }
                 email.getTitle().typeface = Typeface.DEFAULT
                 email.getSubtitle().typeface = Typeface.DEFAULT
                 email.getDate().typeface = Typeface.DEFAULT
-                if(resources.configuration.screenWidthDp>=700){
-                    activity.supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragmentEmailDetail,emailDetailFrag)
-                        .commit()
-                }
-                else{
-                    activity.supportFragmentManager.beginTransaction()
-                        .addToBackStack("Detail Fragment")
-                        .addSharedElement(email,"emailListTransitionName$position")
-                        .replace(R.id.fragmentEmailList,emailDetailFrag)
-                        .commit()
-                }
+                val communicator = context as FragmentCommunicator
+                communicator.displayDetails(email,emailList[position].title,emailList[position].subtitle,
+                    emailList[position].date,emailList[position].content,emailList[position].isStarred,emailList[position].isViewed,"emailListTransitionName$position")
             }
+
             star.setOnClickListener {
                 if(emailList[position].isStarred){
                     emailList[position].isStarred = false
@@ -110,5 +91,4 @@ class EmailAdapter(private val emailList:MutableList<Email>,private val activity
             }
         }
     }
-
 }

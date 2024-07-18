@@ -7,6 +7,8 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
+        android:id="@+id/cardView"
+        android:elevation="4dp"
         android:layout_height="wrap_content">
     <com.example.customemaildetailflow.CustomEmail
         android:padding="20dp"

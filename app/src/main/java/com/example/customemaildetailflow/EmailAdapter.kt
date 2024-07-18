@@ -78,6 +78,7 @@ class EmailAdapter(private val emailList:MutableList<Email>,private val activity
                     putString("content",emailList[position].content)
                     putString("date",emailList[position].date)
                     putBoolean("isStarred",emailList[position].isStarred)
+                    putString("profileLetter",emailList[position].title[0].toString())
                 }
                 email.getTitle().typeface = Typeface.DEFAULT
                 email.getSubtitle().typeface = Typeface.DEFAULT

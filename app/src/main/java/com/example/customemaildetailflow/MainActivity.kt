@@ -14,23 +14,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivity : AppCompatActivity() {
+
+
+    object emails {
+        var emailList = mutableListOf<Email>()
+    }
+    private var emailList = emails.emailList
     private var isDualPane = false
     val fragmentEmailList = EmailListFragment()
     val fragmentEmailDetail = EmailDetailFragment()
     lateinit var fragmentList:FragmentContainerView
-    val emailList = EmailList.emailList
     override fun onCreate(savedInstanceState: Bundle?) {
+
         println("In Activity Created")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        if(resources.configuration.screenWidthDp>=700){
-            fragmentEmailList.arguments = Bundle().apply { putBoolean("isDual",true) }
-        }
-        else{
-            fragmentEmailList.arguments = Bundle().apply { putBoolean("isDual",false) }
-        }
-        println("Saved Instance: $savedInstanceState")
         if(savedInstanceState != null){
 
             println("In Saved onCreate Instance")
@@ -50,7 +48,6 @@ class MainActivity : AppCompatActivity() {
         }
         else{
             println("In UNSaved onCreate Instance")
-            for(i in 1..5){
                 emailList.add(Email("HelloIEEE Conference on Computer Vision and Pattern Recognition is the biggest and one ofIEEE Conference on Computer Vision and Pattern Recognition is the biggest and one ofIEEE Conference on Computer Vision and Pattern Recognition is the biggest and one of","Hi Sathish","12 Seition is tition is tition is tition is tition is tptember","Interested in Java",false,false))
                 emailList.add(Email("Googlesion and Pattern Rsion and Pattern R","New Sign in Activity","07 September","Hi Satish is that you signed your google account on the device MK210P",false,false))
                 emailList.add(Email("New Email","Heading Line","05 May","This is the sample content",false,false))
@@ -120,22 +117,27 @@ class MainActivity : AppCompatActivity() {
                 emailList.add(Email("Volunteer Appreciation", "Thank You for Your Volunteer Service", "25 May", "Dear Volunteer,\n\nWe deeply appreciate your dedication and commitment to our cause. Your contributions make a significant difference in our community.\n\nWarm regards,\nVolunteer Coordinator",false,false))
                 emailList.add(Email("Technology Update", "Introducing Our AI-Powered Assistant", "30 June", "Dear User,\n\nWe're excited to introduce our new AI-powered assistant designed to enhance your productivity and streamline your daily tasks.\n\nDiscover its capabilities today!\nProduct Team",false,false))
                 emailList.add(Email("Educational Seminar", "Attend Our Seminar on Emerging Technologies", "05 July", "Dear Tech Enthusiast,\n\nJoin us for an insightful seminar on emerging technologies shaping the future. Gain valuable insights from industry experts.\n\nBest regards,\nEvent Organizers",false,false))
-            }
+
         }
-        if((savedInstanceState == null)||((resources.configuration.screenWidthDp>=700))) {
+        if(resources.configuration.screenWidthDp>=700){
+            fragmentEmailList.arguments = Bundle().apply { putBoolean("isDual",true) }
+        }
+        else{
+            fragmentEmailList.arguments = Bundle().apply { putBoolean("isDual",false) }
+        }
+        println("Saved Instance: $savedInstanceState")
+        if((savedInstanceState == null)) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragmentEmailList, fragmentEmailList, "Email Fragment List")
                 .commit()
-            if(resources.configuration.screenWidthDp>=700){
-                onRestart()
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentEmailList,fragmentEmailList)
-                    .replace(R.id.fragmentEmailDetail,fragmentEmailDetail)
-                    .commit()
-            }
         }
-
-
+        if(resources.configuration.screenWidthDp>=700){
+            onRestart()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentEmailList,fragmentEmailList)
+                .replace(R.id.fragmentEmailDetail,fragmentEmailDetail)
+                .commit()
+        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
@@ -149,7 +151,6 @@ class MainActivity : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         var i = 0
-
         println("OnSaveInstance")
         outState.putInt("size",emailList.size)
         for(email in emailList){
@@ -163,4 +164,5 @@ class MainActivity : AppCompatActivity() {
             i+=1
         }
     }
+
 }

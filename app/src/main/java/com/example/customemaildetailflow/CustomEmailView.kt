@@ -8,6 +8,7 @@ import android.graphics.ColorFilter
 import android.graphics.Typeface
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
+import android.graphics.drawable.shapes.Shape
 import android.provider.ContactsContract.CommonDataKinds.Im
 import android.text.Layout
 import android.text.TextUtils
@@ -298,6 +299,11 @@ class CustomEmail @JvmOverloads constructor(
     fun getProfileView():TextView{
         return profileView
     }
-
+    fun getProfileLetter():String{
+        return profileView.text.toString()
+    }
+    fun getShape():ShapeDrawable{
+        return shape
+    }
 
 }

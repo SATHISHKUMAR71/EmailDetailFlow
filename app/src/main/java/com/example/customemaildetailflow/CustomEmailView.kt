@@ -45,7 +45,6 @@ class CustomEmail @JvmOverloads constructor(
 
     init {
 
-        println(desiredTextSize)
         profileView = TextView(context)
         star = ImageView(context)
         shape.paint.color = com.google.android.material.R.attr.colorAccent
@@ -300,10 +299,5 @@ class CustomEmail @JvmOverloads constructor(
         return profileView
     }
 
-//    override fun onConfigurationChanged(newConfig: Configuration?) {
-//        super.onConfigurationChanged(newConfig)
-//        requestLayout()
-//        invalidate()
-//    }
 
 }

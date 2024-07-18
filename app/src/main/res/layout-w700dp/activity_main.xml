@@ -8,16 +8,14 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.fragment.app.FragmentContainerView
+    <FrameLayout
         android:id="@+id/fragmentEmailList"
-        android:name="com.example.customemaildetailflow.EmailListFragment"
         android:layout_weight="1.5"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <androidx.fragment.app.FragmentContainerView
+    <FrameLayout
         android:id="@+id/fragmentEmailDetail"
         android:layout_weight="1"
-        android:name="com.example.customemaildetailflow.EmailDetailFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

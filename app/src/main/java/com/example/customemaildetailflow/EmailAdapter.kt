@@ -13,29 +13,20 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 
-class EmailAdapter(private val emailList:MutableList<Email>,private val activity: FragmentActivity) : RecyclerView.Adapter<EmailAdapter.EmailViewHolder>() {
+class EmailAdapter(private val emailList:MutableList<Email>,private val activity: FragmentActivity,private val isDualPane:Boolean?) : RecyclerView.Adapter<EmailAdapter.EmailViewHolder>() {
 
-    inner class EmailViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView)
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmailViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.email_view,parent,false)
-        return EmailViewHolder(view)
-    }
+    inner class EmailViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView){
 
-    override fun getItemCount(): Int {
-        return emailList.size
-    }
-
-    override fun onBindViewHolder(holder: EmailViewHolder, position: Int) {
-        var i=0
-        holder.itemView.apply {
-            val email = this.findViewById<CustomEmail>(R.id.emailView)
-            val star = email.getStar()
+        fun bindData(email:CustomEmail,position:Int){
             email.transitionName = "emailListTransitionName$position"
             email.setTitle(emailList[position].title)
             email.setContent(emailList[position].content)
             email.setSubtitle(emailList[position].subtitle)
             email.setDate(emailList[position].date)
             email.setProfileLetter("${emailList[position].title[0]}")
+        }
+
+        fun checkIsViewed(email:CustomEmail,position:Int){
             if(emailList[position].isViewed){
                 email.getTitle().typeface = Typeface.DEFAULT
                 email.getSubtitle().typeface = Typeface.DEFAULT
@@ -46,16 +37,41 @@ class EmailAdapter(private val emailList:MutableList<Email>,private val activity
                 email.getSubtitle().typeface = Typeface.DEFAULT_BOLD
                 email.getDate().typeface = Typeface.DEFAULT_BOLD
             }
+        }
+
+        fun checkIsStarred(email:CustomEmail,position:Int){
             if(emailList[position].isStarred){
-                star.setImageResource(R.drawable.baseline_star_24)
+//                println("Email is Stared: ${emailList[position].isStarred}")
+                email.getStar().setImageResource(R.drawable.baseline_star_24)
             }
             else{
-                star.setImageResource(R.drawable.baseline_star_outline_24)
+                email.getStar().setImageResource(R.drawable.baseline_star_outline_24)
             }
+        }
+    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EmailViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.email_view,parent,false)
+        return EmailViewHolder(view)
+    }
+
+    override fun getItemCount(): Int {
+        return emailList.size
+    }
+
+    override fun onBindViewHolder(holder: EmailViewHolder, position: Int) {
+
+        holder.itemView.apply {
+
+            val emailDetailFrag = EmailDetailFragment()
+            val emailListFrag = EmailListFragment()
+            val email = this.findViewById<CustomEmail>(R.id.emailView)
+            val star = email.getStar()
+            holder.bindData(email,position)
+            holder.checkIsViewed(email,position)
+            holder.checkIsStarred(email,position)
             this.setOnClickListener{
                 emailList[position].isViewed = true
-                val emailFragment = EmailDetailFragment()
-                emailFragment.arguments = Bundle().apply {
+                emailDetailFrag.arguments = Bundle().apply {
                     putString("transitionName","emailListTransitionName$position")
                     putString("title",emailList[position].title)
                     putString("heading",emailList[position].subtitle)
@@ -63,28 +79,32 @@ class EmailAdapter(private val emailList:MutableList<Email>,private val activity
                     putString("date",emailList[position].date)
                     putBoolean("isStarred",emailList[position].isStarred)
                 }
-                println("listEmailTransition:${"emailListTransitionName$position"}")
-                activity.supportFragmentManager.beginTransaction()
-                    .setReorderingAllowed(true)
-                    .addSharedElement(email,"emailListTransitionName$position")
-                    .replace(R.id.fragmentEmailList,emailFragment)
-                    .addToBackStack("Detail View")
-                    .commit()
                 email.getTitle().typeface = Typeface.DEFAULT
                 email.getSubtitle().typeface = Typeface.DEFAULT
                 email.getDate().typeface = Typeface.DEFAULT
-            }
-            star.setOnClickListener {
-                i+=1
-                if(i%2 == 1){
-                    emailList[position].isStarred = true
-                    Toast.makeText(context,"Message Starred",Toast.LENGTH_SHORT).show()
-                    star.setImageResource(R.drawable.baseline_star_24)
+                if(resources.configuration.screenWidthDp>=700){
+                    activity.supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragmentEmailDetail,emailDetailFrag)
+                        .commit()
                 }
                 else{
+                    activity.supportFragmentManager.beginTransaction()
+                        .addToBackStack("Detail Fragment")
+                        .addSharedElement(email,"emailListTransitionName$position")
+                        .replace(R.id.fragmentEmailList,emailDetailFrag)
+                        .commit()
+                }
+            }
+            star.setOnClickListener {
+                if(emailList[position].isStarred){
                     emailList[position].isStarred = false
-                    Toast.makeText(context,"Message Unstarred",Toast.LENGTH_SHORT).show()
                     star.setImageResource(R.drawable.baseline_star_outline_24)
+                    Toast.makeText(context,"Message UnStarred",Toast.LENGTH_SHORT).show()
+                }
+                else{
+                    emailList[position].isStarred = true
+                    star.setImageResource(R.drawable.baseline_star_24)
+                    Toast.makeText(context,"Message Starred",Toast.LENGTH_SHORT).show()
                 }
             }
         }

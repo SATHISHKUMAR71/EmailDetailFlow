@@ -46,27 +46,7 @@ class EmailDetailFragment : Fragment() {
         profileView = view.findViewById(R.id.profileView)
         scrollView = view.findViewById(R.id.scrollViewEmailDetail)
         view.visibility = View.INVISIBLE
-        var index = 0
-        for(i in MainActivity.emails.emailList){
-            if(i.title.equals(title)){
-                break
-            }
-            index+=1
-        }
-        starImage.setOnClickListener {
-            if(isStarredDetail){
-                isStarredDetail = false
-//                MainActivity.emails.emailList[index].isStarred = false
-                starImage.setImageResource(R.drawable.baseline_star_outline_24)
-                starImage.visibility = View.VISIBLE
-            }
-            else{
-                isStarredDetail = true
-//                MainActivity.emails.emailList[index].isStarred = true
-                starImage.setImageResource(R.drawable.baseline_star_24)
-                starImage.visibility = View.VISIBLE
-            }
-        }
+
         return view
     }
 

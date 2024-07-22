@@ -12,9 +12,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 
-class EmailAdapter(private val emailList:MutableList<Email>,private val activity: FragmentActivity,private val isDualPane:Boolean?) : RecyclerView.Adapter<EmailAdapter.EmailViewHolder>() {
+class EmailAdapter(private val emailList:MutableLiveData<MutableList<Email>>,private val activity: FragmentActivity,private val isDualPane:Boolean?) : RecyclerView.Adapter<EmailAdapter.EmailViewHolder>() {
 
     inner class EmailViewHolder(itemView:View) : RecyclerView.ViewHolder(itemView){
 

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentContainerView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,9 +18,8 @@ import androidx.transition.TransitionInflater
 
 class EmailListFragment : Fragment() {
 
-
-    private val emailList = MainActivity.emails.emailList
-
+    val viewModel = ViewModelProvider(this)[MainActivityViewModel::class.java]
+    var emailList = viewModel.emails
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         println("In onCreate")

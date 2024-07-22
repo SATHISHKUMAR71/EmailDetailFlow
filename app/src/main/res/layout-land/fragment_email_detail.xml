@@ -60,27 +60,27 @@
                     android:id="@+id/profileView"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="30dp"
                     android:background="@drawable/profile_shape"
                     android:gravity="center"
                     android:text="ProfileView"
                     android:textColor="@color/white"
                     android:textSize="32sp"
                     android:visibility="invisible"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageView
                     android:id="@+id/star"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="bottom"
-                    android:layout_marginTop="10dp"
                     android:layout_weight="1"
+                    android:layout_marginEnd="30dp"
                     android:src="@drawable/baseline_star_outline_24"
                     android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
